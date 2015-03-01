@@ -56,6 +56,7 @@
       this.render();
 
       this.collection.on("add", this.renderBook, this);
+      this.collection.on("remove", this.removeBook, this);
     },
     
     render: function() {
@@ -86,13 +87,27 @@
       this.collection.add(new Book(formData));
     },
 
-
-
     renderBook: function(item) {
       var bookView = new BookView({
         model: item
       });
       this.$el.append(bookView.render().el);
+    },
+
+    removeBook: function(removedBook) {
+      var removedBookData = removedBook.attributes;
+
+      _.each(removedBookData, function(val, key) {
+        if(removedBookData[key] === removedBook.defaults[key]) {
+          delete removedBookData[key];
+        }
+      });
+
+      _.each(books, function(book) {
+        if(_.isEqual(book, removedBookData)) {
+          books.splice(_.indexOf(books, book), 1);
+        }
+      });
     }
   });
 
