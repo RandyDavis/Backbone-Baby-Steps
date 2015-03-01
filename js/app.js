@@ -44,6 +44,18 @@
       this.render();
     },
 
+    addBook: function() {
+      var formData = {};
+
+      $("#addBook").children("input").each(function(i, el) {
+        formData[el.id] = $(el).val();
+      });
+
+      books.push(formData);
+
+      this.collection.add(new Book(formData));
+    },
+
     render: function() {
       var self = this;
       _.each(this.collection.models, function(item) {
