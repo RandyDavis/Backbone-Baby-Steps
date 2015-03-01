@@ -16,33 +16,15 @@
         <li>Keywords</li>
       </ul>
     </div>
-    <div class="bookContainer">
-      <img src="img/placeholder.png" alt="Placeholder Book Image">
+    <script id="bookTemplate" type="text/template">
+      <img src="<%= coverImage %>">
       <ul>
-        <li>Title</li>
-        <li>Author</li>
-        <li>Release Date</li>
-        <li>Keywords</li>
+        <li><%= title %></li>
+        <li><%= author %></li>
+        <li><%= releaseDate %></li>
+        <li><%= keywords %></li>
       </ul>
-    </div>
-    <div class="bookContainer">
-      <img src="img/placeholder.png" alt="Placeholder Book Image">
-      <ul>
-        <li>Title</li>
-        <li>Author</li>
-        <li>Release Date</li>
-        <li>Keywords</li>
-      </ul>
-    </div>
-    <div class="bookContainer">
-      <img src="img/placeholder.png" alt="Placeholder Book Image">
-      <ul>
-        <li>Title</li>
-        <li>Author</li>
-        <li>Release Date</li>
-        <li>Keywords</li>
-      </ul>
-    </div>
+    </script>
   </div>
   <script src="js/lib/jquery-min.js"></script>
   <script src="js/lib/underscore-min.js"></script>
