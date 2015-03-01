@@ -1,4 +1,12 @@
 (function ($) {
+  var books = [
+    { title: "JS The Good Parts", author: "John Doe", releaseDate: "2012", keywords: "JavaScript Programming" },
+    { title: "CS The Better Parts", author: "John Doe", releaseDate: "2012", keywords: "CoffeeScript Programming" },
+    { title: "Scala for the Impatient", author: "John Doe", releaseDate: "2012", keywords: "Scala Programming" },
+    { title: "American Psycho", author: "Brett Easton Ellis", releaseDate: "2012", keywords: "Novel Splatter" },
+    { title: "Eloquent JavaScript", author: "John Doe", releaseDate: "2012", keywords: "JavaScript Programming" }
+  ];
+
   var Book = Backbone.Model.extend({
     defaults: {
       coverImage: "img/placeholder.png",
@@ -7,6 +15,11 @@
       releaseDate: "2012",
       keywords: "JavaScript Programming"
     }
+  });
+
+
+  var Library = Backbone.Collection.extend({
+    model: Book
   });
 
   var BookView = Backbone.View.extend({
@@ -22,16 +35,32 @@
     }
   });
 
-  var book = new Book({
-    title: "Some title",
-    author: "John Doe",
-    releaseDate: "2012",
-    keywords: "JavaScript Programming"
+
+  var LibraryView = Backbone.View.extend({
+    el: $("#books"),
+
+    initialize: function() {
+      this.collection = new Library(books);
+      this.render();
+    },
+
+    render: function() {
+      var self = this;
+      _.each(this.collection.models, function(item) {
+        self.renderBook(item);
+      }, this);
+    },
+
+    renderBook: function(item) {
+      var bookView = new BookView({
+        model: item
+      });
+      this.$el.append(bookView.render().el);
+    }
   });
 
-  var bookView = new BookView({
-    model: book
-  });
 
-  $("#books").html(bookView.render().el);
+
+
+  var libraryView = new LibraryView();
 }) (jQuery);
