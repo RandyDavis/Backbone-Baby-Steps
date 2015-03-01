@@ -10,10 +10,10 @@
   var Book = Backbone.Model.extend({
     defaults: {
       coverImage: "img/placeholder.png",
-      title: "Some Title",
-      author: "John Doe",
-      releaseDate: "2012",
-      keywords: "JavaScript Programming"
+      title: "No Title",
+      author: "Unknown",
+      releaseDate: "Unknown",
+      keywords: "None"
     }
   });
 
@@ -42,13 +42,31 @@
     initialize: function() {
       this.collection = new Library(books);
       this.render();
+
+      this.collection.on("add", this.renderBook, this);
+    },
+    
+    render: function() {
+      var self = this;
+      _.each(this.collection.models, function(item) {
+        self.renderBook(item);
+      });
     },
 
-    addBook: function() {
+    events: {
+      "click #add": "addBook"
+    },
+    
+    addBook: function(e) {
+      e.preventDefault();
+
       var formData = {};
 
-      $("#addBook").children("input").each(function(i, el) {
-        formData[el.id] = $(el).val();
+      $("#addBook div").children("input").each(function(i, el) {
+        // Check to see if a value exists for the element we want, if not, defaults will be used
+        if($(el).val() !== "") {
+          formData[el.id] = $(el).val();
+        }
       });
 
       books.push(formData);
@@ -56,12 +74,7 @@
       this.collection.add(new Book(formData));
     },
 
-    render: function() {
-      var self = this;
-      _.each(this.collection.models, function(item) {
-        self.renderBook(item);
-      }, this);
-    },
+
 
     renderBook: function(item) {
       var bookView = new BookView({
