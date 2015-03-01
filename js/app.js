@@ -32,6 +32,18 @@
 
       this.$el.html(tmpl(this.model.toJSON()));  // this.el is what we define in tagName.  Use $el to get access to jQuery html() function
       return this;
+    },
+
+    events: {
+      "click .delete": "deleteBook"
+    },
+
+    deleteBook: function() {
+      // Delete Model
+      this.model.destroy();
+
+      // Delete View
+      this.remove();
     }
   });
 
