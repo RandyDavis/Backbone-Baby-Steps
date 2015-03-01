@@ -21,4 +21,17 @@
       return this;
     }
   });
+
+  var book = new Book({
+    title: "Some title",
+    author: "John Doe",
+    releaseDate: "2012",
+    keywords: "JavaScript Programming"
+  });
+
+  var bookView = new BookView({
+    model: book
+  });
+
+  $("#books").html(bookView.render().el);
 }) (jQuery);
