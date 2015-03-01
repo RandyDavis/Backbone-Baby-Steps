@@ -58,6 +58,15 @@ body {
   line-height: 0;
 }
 
+.bookContainer ul {
+  list-style-type: none;
+  margin-bottom: 0;
+}
+
+.bookContainer button {
+  float: right;
+  margin: 10px;
+}
 
 
 
