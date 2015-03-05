@@ -39,3 +39,42 @@ var Book = new mongoose.Schema({
 // Models
 var BookModel = mongoose.model('Book', Book);
 
+// Get a list of all books
+app.get('/api/books', function(req, res) {
+  return BookModel.find(function(err, books) {
+    if (!err) {
+      return res.send(books);
+    } else {
+      return console.log(err);
+    }
+  });
+});
+
+// Insert a new book
+app.post('/api/books', function(req, res) {
+  var book = new BookModel({
+    title:req.body.title,
+    author:req.body.author,
+    releaseDate:req.body.releaseDate
+  });
+  book.save(function(err) {
+    if (!err) {
+      return console.log('created');
+    } else {
+      return console.log(err);
+    }
+  });
+  return res.send(book);
+});
+
+
+
+
+
+
+
+
+
+
+
+
