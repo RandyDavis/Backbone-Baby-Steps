@@ -20,3 +20,22 @@ app.configure(function() {
 app.listen(4711, function() {
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
+
+// Routes
+app.get('/api', function(req, res) {
+  res.send('Library API is running');
+});
+
+// Connect to database
+mongoose.connect('mongodb://localhost/library_database');
+
+// Schemas
+var Book = new mongoose.Schema({
+  title: String,
+  author: String,
+  releaseDate: Date
+});
+
+// Models
+var BookModel = mongoose.model('Book', Book);
+

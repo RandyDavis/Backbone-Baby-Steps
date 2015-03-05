@@ -1,6 +1,9 @@
 body {
   background-color: #eee;
 }
+#books {
+  margin: 10px auto 10px;
+}
 
 .bookContainer {
   border: 1px solid #aaa;
