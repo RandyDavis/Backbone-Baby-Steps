@@ -67,7 +67,7 @@ app.post('/api/books', function(req, res) {
   return res.send(book);
 });
 
-// Get a book
+// GET a book
 app.get('/api/books/:id', function(req, res) {
   return BookModel.findById(req.params.id, function(err, book) {
     if(!err) {
@@ -78,8 +78,38 @@ app.get('/api/books/:id', function(req, res) {
   });
 });
 
+// PUT (update) a book
+app.put('/api/books/:id', function(req, res) {
+  console.log('Updating book ' + req.body.title);
+  return BookModel.findById(req.params.id, function(err, book) {
+    book.title = req.body.title;
+    book.author = req.body.author;
+    book.releaseDate = req.body.releaseDate;
+    return book.save(function(err) {
+      if(!err) {
+        console.log("book updated");
+      } else {
+        console.log(err);
+      }
+      return res.send(book);
+    });
+  });
+});
 
-
+// Delete the book/route
+app.delete('/api/books/:id', function(req, res) {
+  console.log('Deleting book with id: ' + req.params.id);
+  return BookModel.findById(req.params.id, function(err, book) {
+    return book.remove(function(err) {
+      if(!err) {
+        console.log('Book removed');
+        return res.send('');
+      } else {
+        console.log(err);
+      }
+    });
+  });
+});
 
 
 
