@@ -67,6 +67,17 @@ app.post('/api/books', function(req, res) {
   return res.send(book);
 });
 
+// Get a book
+app.get('/api/books/:id', function(req, res) {
+  return BookModel.findById(req.params.id, function(err, book) {
+    if(!err) {
+      return res.send(book);
+    } else {
+      return console.log(err);
+    }
+  });
+});
+
 
 
 
