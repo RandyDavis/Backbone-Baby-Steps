@@ -13,7 +13,7 @@
         <label for="title">Title: </label><input id="title">
         <label for="author">Author: </label><input id="author">
         <label for="releaseDate">Release Date: </label><input id="releaseDate">
-        <label for="keywords">Keywords: </label><input id="keywords">
+        <label for="keywords">Keywords: </label><input id="keywords" placeholder="Comma separated">
         <button id="add">Add</button>
       </div>
     </form>
@@ -32,7 +32,13 @@
         <li><%= title %></li>
         <li><%= author %></li>
         <li><%= $.format.date(new Date(releaseDate), 'dd/MM/yyyy' %></li>
-        <li><% _.each(keywords, function(keyobj) { %> <%= keyobj.keyword %><% }}); %></li>
+        <li>
+          <% _.each(keywords, function(keyobj) { %> 
+            <%= keyobj.keyword %>
+            <% if(index < list.length - 1) { %>
+              <%= ', ' %>
+          <% }}); %>
+        </li>
       </ul>
       <button class="delete">Delete</button>
     </script>
