@@ -53,11 +53,14 @@
     el: $("#books"),
 
     initialize: function() {
-      this.collection = new Library(books);
+      // this.collection = new Library(books);
+      this.collection = new Library();
+      this.collection.fetch();
       this.render();
 
       this.collection.on("add", this.renderBook, this);
       this.collection.on("remove", this.removeBook, this);
+      this.collection.on("reset", this.render, this);
     },
     
     render: function() {
