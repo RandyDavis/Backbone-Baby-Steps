@@ -19,7 +19,8 @@
 
 
   var Library = Backbone.Collection.extend({
-    model: Book
+    model: Book,
+    url: '/api/books'
   });
 
   var BookView = Backbone.View.extend({
