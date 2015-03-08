@@ -1,4 +1,6 @@
 (function ($) {
+  // $("#releaseDate").datepicker();
+  
   var books = [
     { title: "JS The Good Parts", author: "John Doe", releaseDate: "2012", keywords: "JavaScript Programming" },
     { title: "CS The Better Parts", author: "John Doe", releaseDate: "2012", keywords: "CoffeeScript Programming" },
