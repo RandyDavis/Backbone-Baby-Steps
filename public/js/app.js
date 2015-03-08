@@ -14,7 +14,13 @@
       author: "Unknown",
       releaseDate: "Unknown",
       keywords: "None"
-    }
+    },
+    // parse: function(response) {
+    //   console.log(response);
+    //   response.id = response._id;
+    //   return response;
+    // }
+    idAttribute: "_id"
   });
 
 
