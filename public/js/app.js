@@ -94,7 +94,9 @@
 
       books.push(formData);
 
-      this.collection.add(new Book(formData));
+      // this.collection.add(new Book(formData));
+      // Update above new book to "create" a book to persist on the sever
+      this.collection.create(formData);
     },
 
     renderBook: function(item) {
