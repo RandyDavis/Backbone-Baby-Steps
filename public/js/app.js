@@ -1,6 +1,6 @@
 (function ($) {
   // $("#releaseDate").datepicker();
-  
+
   var books = [
     { title: "JS The Good Parts", author: "John Doe", releaseDate: "2012", keywords: "JavaScript Programming" },
     { title: "CS The Better Parts", author: "John Doe", releaseDate: "2012", keywords: "CoffeeScript Programming" },
@@ -90,7 +90,19 @@
       $("#addBook div").children("input").each(function(i, el) {
         // Check to see if a value exists for the element we want, if not, defaults will be used
         if($(el).val() !== "") {
-          formData[el.id] = $(el).val();
+          if (el.id === 'keywords') {
+            var keywordArray = $(el).val().split(', ');
+            var keywordObjects = [];
+            for (var j = 0; j < keywordArray.length; j++) {
+              keywordObjects[j] = {"keword":keywordArray[j]};
+            }
+            formData[el.id] = keywordObjects;
+          }
+          else if(el.id === 'releaseDate') {
+            formData[el.id] = $('#releaseDate').datepicker("getDate").getTime();
+          } else {
+            formData[el.id] = $(el).val();
+          }
         }
       });
 
